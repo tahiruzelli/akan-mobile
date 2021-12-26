@@ -1,4 +1,4 @@
-package com.example.akan
+package com.akan.android
 
 import io.flutter.embedding.android.FlutterActivity
 
