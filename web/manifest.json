@@ -1,6 +1,6 @@
 {
-    "name": "akan",
-    "short_name": "akan",
+    "name": "akan_flutter",
+    "short_name": "akan_flutter",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

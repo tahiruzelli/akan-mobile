@@ -1,4 +1,4 @@
-# akan
+# akan_flutter
 
 A new Flutter project.
 

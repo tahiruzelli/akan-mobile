@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "386307284760",
+    "project_id": "derss5",
+    "storage_bucket": "derss5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:386307284760:android:96d30f44ab8960d8ed086d",
+        "android_client_info": {
+          "package_name": "com.akan.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "386307284760-jspeuq8ssenihaalnpsj6r1dcasdp5br.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXLi1ElL0qa4BrjVF2FwVI0qOatVkAqAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "386307284760-jspeuq8ssenihaalnpsj6r1dcasdp5br.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "386307284760-am8pl8hd0d0k8ho96o2stouropjc2r43.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.akan.ios"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
