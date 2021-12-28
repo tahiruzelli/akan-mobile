@@ -1,6 +1,6 @@
-import 'package:akanmobile/Views/Login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'Globals/theme_manager.dart';
+import 'Views/Login/login_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

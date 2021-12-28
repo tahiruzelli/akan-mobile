@@ -1,4 +1,4 @@
-package com.akan.akanmobile
+package com.example.akan_mobile
 
 import io.flutter.embedding.android.FlutterActivity
 

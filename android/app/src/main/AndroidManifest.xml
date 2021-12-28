@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.akan.android">
+    package="com.example.akan_mobile">
    <application
-        android:label="akan_flutter"
+        android:label="akan_mobile"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

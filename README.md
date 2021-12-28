@@ -1,4 +1,4 @@
-# akan_flutter
+# akan_mobile
 
 A new Flutter project.
 

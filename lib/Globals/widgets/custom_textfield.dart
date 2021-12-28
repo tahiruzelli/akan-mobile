@@ -1,4 +1,4 @@
-import 'package:akanmobile/Globals/widgets/password_field.dart';
+import 'package:akan_mobile/Globals/widgets/password_field.dart';
 import 'package:flutter/material.dart';
 
 class LoginFormField extends StatefulWidget {
