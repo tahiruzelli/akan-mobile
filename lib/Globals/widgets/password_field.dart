@@ -22,7 +22,7 @@ class _PasswordFieldState extends State<PasswordField> {
       controller: widget.controller,
       obscureText: _isSecureText,
       decoration: InputDecoration(
-          labelText: 'Sifre',
+          labelText: 'Şifre',
           labelStyle: Theme.of(context).textTheme.caption?.copyWith(
               color: Theme.of(context).colorScheme.secondary, fontSize: 16),
           contentPadding:

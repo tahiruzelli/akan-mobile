@@ -1,15 +1,16 @@
 import 'package:akan_mobile/Globals/widgets/password_field.dart';
 import 'package:flutter/material.dart';
 
-class LoginFormField extends StatefulWidget {
-  const LoginFormField({
-    Key key,
-  }) : super(key: key);
+class CustomTextField extends StatefulWidget {
+  String labelText;
+  String hintText;
+
+  CustomTextField({this.labelText, this.hintText});
   @override
-  State<LoginFormField> createState() => _LoginFormFieldState();
+  State<CustomTextField> createState() => _LoginFormFieldState();
 }
 
-class _LoginFormFieldState extends State<LoginFormField> {
+class _LoginFormFieldState extends State<CustomTextField> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _textFormEmailField = TextEditingController();
   final TextEditingController _textFormPasswordField = TextEditingController();
@@ -22,11 +23,9 @@ class _LoginFormFieldState extends State<LoginFormField> {
           children: [
             buildTextFormField(
               textFormEmailField: _textFormEmailField,
-              labelText: 'E-mail Adresi',
-              hintText: 'example@mail.com',
+              labelText: widget.labelText,
+              hintText: widget.hintText,
             ),
-            const SizedBox(height: 20),
-            PasswordField(controller: _textFormPasswordField),
           ],
         ));
   }

@@ -1,7 +1,10 @@
 import 'package:akan_mobile/Globals/constans/image_constans.dart';
 import 'package:akan_mobile/Globals/widgets/custom_textfield.dart';
+import 'package:akan_mobile/Globals/widgets/password_field.dart';
+import 'package:akan_mobile/Views/Register/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key key}) : super(key: key);
@@ -29,29 +32,38 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.only(left: 30, right: 30),
+        padding: const EdgeInsets.only(left: 30, right: 30),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Spacer(flex: 8),
-              Expanded(flex: 5, child: loginText()),
-              Spacer(flex: 2),
+              const Spacer(flex: 8),
+              const Expanded(flex: 5, child: loginText()),
+              const Spacer(flex: 2),
               Expanded(flex: 5, child: loginWelcomeText(context)),
-              Spacer(flex: 5),
-              Expanded(flex: 13, child: LoginFormField()),
-              Spacer(flex: 1),
+              const Spacer(flex: 5),
+              Expanded(
+                flex: 13,
+                child: Column(
+                  children: [
+                    CustomTextField(
+                      labelText: 'E-mail adres',
+                      hintText: 'example@mail.com',
+                    ),
+                    const SizedBox(height: 20),
+                    const PasswordField(),
+                  ],
+                ),
+              ),
+              const Spacer(flex: 1),
               Expanded(flex: 2, child: rememberMeAndForgetPassword(context)),
-              Spacer(flex: 2),
+              const Spacer(flex: 2),
               Expanded(flex: 5, child: loginButton(context)),
-              Spacer(flex: 1),
-              Expanded(flex: 2, child: chooseSelectionText(context)),
-              Spacer(flex: 1),
-              Expanded(flex: 5, child: googleLoginButton(context)),
-              Spacer(flex: 1),
+              const Spacer(flex: 1),
+              const Spacer(flex: 1),
               Expanded(flex: 2, child: registrationOption(context)),
-              Spacer(flex: 6),
+              const Spacer(flex: 6),
             ],
           ),
         ),
@@ -69,11 +81,16 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
         const SizedBox(width: 10),
         InkWell(
-            child: Text('Kayıt Ol',
-                style: Theme.of(context)
-                    .textTheme
-                    .subtitle1
-                    ?.copyWith(color: Theme.of(context).colorScheme.primary)))
+          onTap: () {
+            Get.to(RegisterPage());
+          },
+          child: Text(
+            'Kayıt Ol',
+            style: Theme.of(context).textTheme.subtitle1?.copyWith(
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+          ),
+        ),
       ],
     );
   }
