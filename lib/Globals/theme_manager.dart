@@ -7,7 +7,7 @@ class ThemeManager {
     brightness: Brightness.light,
     floatingActionButtonTheme:
         const FloatingActionButtonThemeData(backgroundColor: Colors.purple),
-    fontFamily: GoogleFonts.lato().fontFamily,
+    fontFamily: GoogleFonts.poppins().fontFamily,
     // checkboxTheme: ,
     textTheme: const TextTheme(
       headline1: TextStyle(fontSize: 70, fontWeight: FontWeight.w300),

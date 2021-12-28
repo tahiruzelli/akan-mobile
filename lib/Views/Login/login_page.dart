@@ -2,6 +2,7 @@ import 'package:akan_mobile/Globals/constans/image_constans.dart';
 import 'package:akan_mobile/Globals/widgets/custom_textfield.dart';
 import 'package:akan_mobile/Globals/widgets/password_field.dart';
 import 'package:akan_mobile/Views/Register/register_page.dart';
+import 'package:akan_mobile/Views/main/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -133,7 +134,9 @@ class _LoginScreenState extends State<LoginScreen> {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.offAll(MainPage());
+        },
         style: ButtonStyle(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                 RoundedRectangleBorder(
