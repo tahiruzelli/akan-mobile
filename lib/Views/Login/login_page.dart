@@ -1,5 +1,5 @@
-import 'package:akan_flutter/Globals/constans/image_constans.dart';
-import 'package:akan_flutter/Globals/widgets/custom_textfield.dart';
+import 'package:akanmobile/Globals/constans/image_constans.dart';
+import 'package:akanmobile/Globals/widgets/custom_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

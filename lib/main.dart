@@ -1,11 +1,9 @@
-import 'package:akan_flutter/Views/Login/login_page.dart';
+import 'package:akanmobile/Views/Login/login_page.dart';
 import 'package:flutter/material.dart';
 import 'Globals/theme_manager.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
