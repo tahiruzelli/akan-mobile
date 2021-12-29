@@ -52,7 +52,7 @@ class MessageListCard extends StatelessWidget {
                       end: Alignment.topLeft,
                       colors: [
                         colorRed,
-                        Colors.redAccent,
+                        inactiveColor,
                         colorRed,
                       ],
                     ),

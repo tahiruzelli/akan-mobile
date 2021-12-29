@@ -2,6 +2,7 @@ import 'package:akan_mobile/Controllers/main_controller.dart';
 import 'package:akan_mobile/Globals/constans/colors.dart';
 import 'package:akan_mobile/Views/HomePage/home_page.dart';
 import 'package:akan_mobile/Views/Messages/messages_list.dart';
+import 'package:akan_mobile/Views/Notifitacions/notification_list_page.dart';
 import 'package:akan_mobile/Views/main/widgets/custom_animated_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -13,7 +14,7 @@ class MainPage extends StatelessWidget {
   List mainPages = [
     HomePage(),
     MessagesList(),
-    Container(),
+    NotificationListPage(),
     Container(),
   ];
   @override
