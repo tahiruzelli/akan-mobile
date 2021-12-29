@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MainPage extends StatelessWidget {
+  double logoHeight = 75;
+  double logoWidth = 300;
   MainController mainController = Get.put(MainController());
   List mainPages = [
     HomePage(),
@@ -71,13 +73,10 @@ class MainPage extends StatelessWidget {
   AppBar _buildAppBar() {
     return AppBar(
       backgroundColor: colorRed,
-      title: const Text(
-        'AKAN',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontSize: 20,
-        ),
+      title: Image.asset(
+        'assets/images/akanbeyaz.png',
+        height: logoHeight,
+        width: logoWidth,
       ),
       centerTitle: true,
     );
