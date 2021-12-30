@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProfileDetailLine extends StatelessWidget {
+class DetailLine extends StatelessWidget {
   String title;
   String content;
-  ProfileDetailLine({this.title, this.content});
+  DetailLine({this.title, this.content});
   @override
   Widget build(BuildContext context) {
     return Padding(

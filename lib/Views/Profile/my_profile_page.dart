@@ -1,4 +1,4 @@
-import 'package:akan_mobile/Views/Profile/widgets/profile_detail_line.dart';
+import 'package:akan_mobile/Globals/widgets/detail_line.dart';
 import 'package:flutter/material.dart';
 
 class MyProfilePage extends StatelessWidget {
@@ -34,19 +34,19 @@ class MyProfilePage extends StatelessWidget {
   Column _buildMyData() {
     return Column(
       children: [
-        ProfileDetailLine(
+        DetailLine(
           title: 'İsim',
           content: 'Tahir Uzelli',
         ),
-        ProfileDetailLine(
+        DetailLine(
           title: 'E-mail',
           content: 'tahir.uzelli@gmail.com',
         ),
-        ProfileDetailLine(
+        DetailLine(
           title: 'Kan Tipi',
           content: '0 Pozitif',
         ),
-        ProfileDetailLine(
+        DetailLine(
           title: 'Telefon',
           content: '+90 551 552 89 85',
         ),

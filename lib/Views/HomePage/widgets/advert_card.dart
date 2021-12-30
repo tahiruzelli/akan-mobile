@@ -1,5 +1,7 @@
+import 'package:akan_mobile/Views/Adverts/advert_detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class AdvertCard extends StatelessWidget {
@@ -56,7 +58,9 @@ class AdvertCard extends StatelessWidget {
               },
             );
           },
-          onTap: () {},
+          onTap: () {
+            Get.to(AdvertDetail());
+          },
           leading: CircleAvatar(
             backgroundImage: NetworkImage(
                 'https://media-exp1.licdn.com/dms/image/C4D03AQFe883wZOzNDw/profile-displayphoto-shrink_200_200/0/1592940508582?e=1645056000&v=beta&t=n1uJWoEInQjpeP-Q3Mo_54pNcj4rTXCjK4kqX1GX-Zk'),
