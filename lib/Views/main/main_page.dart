@@ -4,6 +4,7 @@ import 'package:akan_mobile/Views/HomePage/home_page.dart';
 import 'package:akan_mobile/Views/Messages/messages_list.dart';
 import 'package:akan_mobile/Views/Notifitacions/notification_list_page.dart';
 import 'package:akan_mobile/Views/Profile/my_profile_page.dart';
+import 'package:akan_mobile/Views/Proposals/proposals_page.dart';
 import 'package:akan_mobile/Views/main/widgets/custom_animated_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,14 +16,14 @@ class MainPage extends StatelessWidget {
   List mainPages = [
     HomePage(),
     MessagesList(),
-    NotificationListPage(),
+    ProposalsPage(),
     MyProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {
     return Obx(
       () => Scaffold(
-        appBar: _buildAppBar(),
+        appBar: mainController.currentIndex.value == 2 ? null : _buildAppBar(),
         body: mainPages[mainController.currentIndex.value],
         bottomNavigationBar: _buildBottomBar(),
       ),
@@ -56,8 +57,8 @@ class MainPage extends StatelessWidget {
           textAlign: TextAlign.center,
         ),
         BottomNavyBarItem(
-          icon: const Icon(Icons.notifications),
-          title: const Text('Bildirimler'),
+          icon: const Icon(Icons.my_library_books),
+          title: const Text('İşlemlerim'),
           activeColor: Colors.white,
           inactiveColor: inactiveColor,
           textAlign: TextAlign.center,
@@ -84,7 +85,14 @@ class MainPage extends StatelessWidget {
                   Icons.settings,
                 ),
               )
-            : Container(),
+            : IconButton(
+                onPressed: () {
+                  Get.to(NotificationListPage());
+                },
+                icon: const Icon(
+                  Icons.notifications,
+                ),
+              )
       ],
       leading: IconButton(
         onPressed: () {},
