@@ -3,6 +3,7 @@ import 'package:akan_mobile/Globals/constans/colors.dart';
 import 'package:akan_mobile/Views/HomePage/home_page.dart';
 import 'package:akan_mobile/Views/Messages/messages_list.dart';
 import 'package:akan_mobile/Views/Notifitacions/notification_list_page.dart';
+import 'package:akan_mobile/Views/Profile/my_profile_page.dart';
 import 'package:akan_mobile/Views/main/widgets/custom_animated_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +16,7 @@ class MainPage extends StatelessWidget {
     HomePage(),
     MessagesList(),
     NotificationListPage(),
-    Container(),
+    MyProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -75,6 +76,20 @@ class MainPage extends StatelessWidget {
   AppBar _buildAppBar() {
     return AppBar(
       backgroundColor: colorRed,
+      actions: [
+        mainController.currentIndex.value == 3
+            ? IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.settings,
+                ),
+              )
+            : Container(),
+      ],
+      leading: IconButton(
+        onPressed: () {},
+        icon: const Icon(Icons.add_box),
+      ),
       title: Image.asset(
         'assets/images/akanbeyaz.png',
         height: logoHeight,
