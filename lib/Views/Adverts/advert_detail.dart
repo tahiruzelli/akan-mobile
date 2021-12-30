@@ -4,6 +4,7 @@ import 'package:akan_mobile/Globals/widgets/detail_line.dart';
 import 'package:akan_mobile/Globals/widgets/my_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AdvertDetail extends StatelessWidget {
   AdvertController advertController = Get.put(AdvertController());
@@ -14,10 +15,77 @@ class AdvertDetail extends StatelessWidget {
       body: ListView(
         children: [
           _buildImageArea(),
-          _buildMyData(),
+          _buildData(),
+          _buildSeeLocationButton(),
           _buildDetails(),
           _buildButtons(),
         ],
+      ),
+    );
+  }
+
+  _buildSeeLocationButton() {
+    return InkWell(
+      onTap: () {
+        _buildMap();
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4),
+        child: Card(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: Get.width * 0.02),
+                  child: const Text('Konumu Gör'),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(right: Get.width * 0.02),
+                  child: const Icon(Icons.arrow_right),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Future<Widget> _buildMap() {
+    return Get.dialog(
+      Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: Get.height * 0.05, vertical: Get.height * 0.18),
+        child: Container(
+          height: Get.height * 0.6,
+          width: Get.width * 0.8,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white,
+          ),
+          child: Expanded(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: SizedBox(
+                child: GoogleMap(
+                  myLocationButtonEnabled: false,
+                  zoomControlsEnabled: false,
+                  mapType: MapType.normal,
+                  onMapCreated: (map) {},
+                  initialCameraPosition: const CameraPosition(
+                    target: LatLng(
+                      10.0,
+                      20,
+                    ),
+                    zoom: 10,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -77,7 +145,7 @@ class AdvertDetail extends StatelessWidget {
     );
   }
 
-  Column _buildMyData() {
+  Column _buildData() {
     return Column(
       children: [
         DetailLine(
@@ -99,6 +167,14 @@ class AdvertDetail extends StatelessWidget {
         DetailLine(
           title: 'Oluşturma Tarihi',
           content: '2021-12-30',
+        ),
+        DetailLine(
+          title: 'Şehir',
+          content: 'Sakarya',
+        ),
+        DetailLine(
+          title: 'Hastane',
+          content: 'Sakarya E.A.H',
         ),
       ],
     );
