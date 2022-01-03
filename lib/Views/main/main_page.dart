@@ -5,6 +5,7 @@ import 'package:akan_mobile/Views/Messages/messages_list.dart';
 import 'package:akan_mobile/Views/Notifitacions/notification_list_page.dart';
 import 'package:akan_mobile/Views/Profile/my_profile_page.dart';
 import 'package:akan_mobile/Views/Proposals/proposals_page.dart';
+import 'package:akan_mobile/Views/Settings/settings_page.dart';
 import 'package:akan_mobile/Views/main/widgets/custom_animated_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -80,7 +81,9 @@ class MainPage extends StatelessWidget {
       actions: [
         mainController.currentIndex.value == 3
             ? IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(SettingsPage());
+                },
                 icon: const Icon(
                   Icons.settings,
                 ),
