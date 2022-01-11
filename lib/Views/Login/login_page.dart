@@ -1,8 +1,8 @@
+import 'package:akan_mobile/Controllers/login_controller.dart';
 import 'package:akan_mobile/Globals/constans/image_constans.dart';
 import 'package:akan_mobile/Globals/widgets/custom_textfield.dart';
 import 'package:akan_mobile/Globals/widgets/password_field.dart';
 import 'package:akan_mobile/Views/Register/register_page.dart';
-import 'package:akan_mobile/Views/main/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -15,6 +15,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  LoginController loginController = Get.put(LoginController());
+
   bool isChecked = false;
   Color getColor(Set<MaterialState> states) {
     const Set<MaterialState> interactiveStates = <MaterialState>{
@@ -32,40 +34,47 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(left: 30, right: 30),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Spacer(flex: 8),
-              const Expanded(flex: 5, child: loginText()),
-              const Spacer(flex: 2),
-              Expanded(flex: 5, child: loginWelcomeText(context)),
-              const Spacer(flex: 5),
-              Expanded(
-                flex: 13,
-                child: Column(
-                  children: [
-                    CustomTextField(
-                      labelText: 'E-mail adres',
-                      hintText: 'example@mail.com',
-                    ),
-                    const SizedBox(height: 20),
-                    const PasswordField(),
-                  ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 30, right: 30),
+          child: SizedBox(
+            height: Get.height,
+            width: Get.width,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Spacer(flex: 8),
+                const Expanded(flex: 5, child: loginText()),
+                const Spacer(flex: 2),
+                Expanded(flex: 5, child: loginWelcomeText(context)),
+                const Spacer(flex: 5),
+                Expanded(
+                  flex: 13,
+                  child: Column(
+                    children: [
+                      CustomTextField(
+                        controller: loginController.emailController,
+                        labelText: 'E-mail adres',
+                        hintText: 'example@mail.com',
+                      ),
+                      const SizedBox(height: 20),
+                      PasswordField(
+                        controller: loginController.passwordController,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const Spacer(flex: 1),
-              Expanded(flex: 2, child: rememberMeAndForgetPassword(context)),
-              const Spacer(flex: 2),
-              Expanded(flex: 5, child: loginButton(context)),
-              const Spacer(flex: 1),
-              const Spacer(flex: 1),
-              Expanded(flex: 2, child: registrationOption(context)),
-              const Spacer(flex: 6),
-            ],
+                const Spacer(flex: 1),
+                Expanded(flex: 2, child: rememberMeAndForgetPassword(context)),
+                const Spacer(flex: 2),
+                Expanded(flex: 5, child: loginButton(context)),
+                const Spacer(flex: 1),
+                const Spacer(flex: 1),
+                Expanded(flex: 2, child: registrationOption(context)),
+                const Spacer(flex: 6),
+              ],
+            ),
           ),
         ),
       ),
@@ -135,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
-          Get.offAll(MainPage());
+          loginController.onLoginButtonPressed();
         },
         style: ButtonStyle(
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(

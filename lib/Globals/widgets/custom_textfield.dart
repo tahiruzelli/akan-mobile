@@ -4,17 +4,15 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatefulWidget {
   String labelText;
   String hintText;
+  TextEditingController controller;
 
-  CustomTextField({this.labelText, this.hintText});
+  CustomTextField({this.labelText, this.hintText, this.controller});
   @override
   State<CustomTextField> createState() => _LoginFormFieldState();
 }
 
 class _LoginFormFieldState extends State<CustomTextField> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _textFormEmailField = TextEditingController();
-  final TextEditingController _textFormPasswordField = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -22,7 +20,7 @@ class _LoginFormFieldState extends State<CustomTextField> {
         child: Column(
           children: [
             buildTextFormField(
-              textFormEmailField: _textFormEmailField,
+              textFormEmailField: widget.controller,
               labelText: widget.labelText,
               hintText: widget.hintText,
             ),
