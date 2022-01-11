@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.akan_mobile">
+    package="com.akan.android">
    <application
        
         android:label="akan_mobile"
