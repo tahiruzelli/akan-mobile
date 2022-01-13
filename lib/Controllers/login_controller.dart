@@ -13,6 +13,7 @@ class LoginController extends GetxController {
     f.login(emailController.text, passwordController.text).then((value) {
       if (value['success']) {
         GetStorage().write('UserData', value['data']['user'][0]);
+        print(value['data']['user'][0]);
         Get.offAll(MainPage());
       } else {
         errorSnackBar('Hata', value['error']);

@@ -1,10 +1,16 @@
+import 'package:akan_mobile/Controllers/advert_controller.dart';
+import 'package:akan_mobile/Globals/constans/colors.dart';
 import 'package:akan_mobile/Views/Adverts/advert_detail.dart';
+import 'package:akan_mobile/models/advert_model.dart';
+import 'package:akan_mobile/models/all_advert_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 class AdvertCard extends StatelessWidget {
+  AdvertController advertController = Get.find();
+  AllAdvertModel advert;
+  AdvertCard(this.advert);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -59,15 +65,15 @@ class AdvertCard extends StatelessWidget {
             );
           },
           onTap: () {
-            Get.to(AdvertDetail());
+            advertController.onAdvertCardPressed(advert);
           },
           leading: CircleAvatar(
-            backgroundImage: NetworkImage(
-                'https://media-exp1.licdn.com/dms/image/C4D03AQFe883wZOzNDw/profile-displayphoto-shrink_200_200/0/1592940508582?e=1645056000&v=beta&t=n1uJWoEInQjpeP-Q3Mo_54pNcj4rTXCjK4kqX1GX-Zk'),
+            backgroundColor: colorWhite,
+            backgroundImage: NetworkImage(advert.advertCreatorPhoto),
           ),
-          title: Text('Tahir Uzelli'),
-          subtitle: Text('AB+ son 2 gün acil kan'),
-          trailing: Text('29.12.2021'),
+          title: Text(advert.advertCreatorName),
+          subtitle: Text(advert.advertDetail),
+          trailing: Text(advert.advertCreationTime),
         ),
       ),
     );

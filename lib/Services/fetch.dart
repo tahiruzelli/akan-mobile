@@ -43,7 +43,7 @@ class Fetch {
     };
     var jsonBody = const JsonEncoder().convert(body);
     var response = await RestConnector(
-      loginUrl,
+      registerUrl,
       requestType: "POST",
       data: jsonBody,
     ).getData();
@@ -83,5 +83,28 @@ class Fetch {
     } else {
       return [];
     }
+  }
+
+  Future getAdverts() async {
+    var response = await RestConnector(
+      getAdvertsUrl,
+      requestType: "GET",
+      data: '',
+    ).getData();
+    if (response['success']) {
+      return response['data'];
+    } else {
+      return [];
+    }
+  }
+
+  Future beDonor(
+      {@required String transmitterID, @required String advertId}) async {
+    var response = await RestConnector(
+      beDonorUrl + transmitterID + '/$advertId',
+      requestType: "POST",
+      data: '',
+    ).getData();
+    return response;
   }
 }

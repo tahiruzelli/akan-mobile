@@ -7,6 +7,7 @@ import 'Globals/theme_manager.dart';
 import 'Views/Login/login_page.dart';
 
 void main() async {
+  await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    print(GetStorage().read('UserData'));
     return GetMaterialApp(
       title: 'Akan - Acil Kan',
       debugShowCheckedModeBanner: false,

@@ -2,6 +2,7 @@ import 'package:akan_mobile/Controllers/advert_controller.dart';
 import 'package:akan_mobile/Globals/constans/colors.dart';
 import 'package:akan_mobile/Globals/widgets/detail_line.dart';
 import 'package:akan_mobile/Globals/widgets/my_appbar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -123,10 +124,14 @@ class AdvertDetail extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         primary: colorRed,
       ),
-      child: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
         child: Center(
-          child: Text('Donör Ol!'),
+          child: Obx(
+            () => advertController.beDonorLoading.value
+                ? const CupertinoActivityIndicator()
+                : const Text('Donör Ol!'),
+          ),
         ),
       ),
     );
