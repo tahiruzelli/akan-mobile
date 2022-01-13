@@ -85,6 +85,19 @@ class Fetch {
     }
   }
 
+  Future getHospitals() async {
+    var response = await RestConnector(
+      getHospitalsUrl,
+      requestType: "GET",
+      data: '',
+    ).getData();
+    if (response['success']) {
+      return response['data']['hospitals'];
+    } else {
+      return [];
+    }
+  }
+
   Future getAdverts() async {
     var response = await RestConnector(
       getAdvertsUrl,
@@ -104,6 +117,44 @@ class Fetch {
       beDonorUrl + transmitterID + '/$advertId',
       requestType: "POST",
       data: '',
+    ).getData();
+    return response;
+  }
+
+  Future postImage({
+    @required String url,
+    @required String advertId,
+  }) async {
+    Map body = {
+      "url": url,
+      "advertId": advertId,
+    };
+    var jsonBody = const JsonEncoder().convert(body);
+    var response = await RestConnector(
+      postImageUrl,
+      requestType: "POST",
+      data: jsonBody,
+    ).getData();
+    return response;
+  }
+
+  Future createAdvert({
+    @required String bloodType,
+    @required String creatorID,
+    @required String hospitalID,
+    @required String details,
+  }) async {
+    Map body = {
+      "bloodType": bloodType,
+      "creatorID": creatorID,
+      "hospitalID": hospitalID,
+      "details": details,
+    };
+    var jsonBody = const JsonEncoder().convert(body);
+    var response = await RestConnector(
+      getAdvertsUrl,
+      requestType: "POST",
+      data: jsonBody,
     ).getData();
     return response;
   }

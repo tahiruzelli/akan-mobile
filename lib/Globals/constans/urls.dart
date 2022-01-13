@@ -6,3 +6,5 @@ String getDistrictsUrl = '/Districts/FromCity';
 String getBloodTypesUrl = '/BloodTypes';
 String getAdvertsUrl = '/Adverts';
 String beDonorUrl = '/Proposals/MakeProposal/';
+String getHospitalsUrl = '/Hospitals';
+String postImageUrl = '/Photos';
