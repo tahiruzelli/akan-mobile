@@ -8,3 +8,5 @@ String getAdvertsUrl = '/Adverts';
 String beDonorUrl = '/Proposals/MakeProposal/';
 String getHospitalsUrl = '/Hospitals';
 String postImageUrl = '/Photos';
+String getNotificationUrl = '/Notifications/';
+String notificationSeenUrl = getNotificationUrl + 'NotificationHadSeen/';

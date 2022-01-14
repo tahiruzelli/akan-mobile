@@ -158,4 +158,27 @@ class Fetch {
     ).getData();
     return response;
   }
+
+  Future notificationSeen({@required String id}) async {
+    var response = await RestConnector(
+      notificationSeenUrl + id,
+      requestType: "PUT",
+      data: '',
+    ).getData();
+    return response;
+  }
+
+  Future getNotifications({@required String id}) async {
+    var response = await RestConnector(
+      getNotificationUrl,
+      requestType: "GET",
+      data: '',
+    ).getData();
+    if(response['success']){
+      return response['data']['notifications'];
+    }
+    else{
+      return [];
+    }
+  }
 }
