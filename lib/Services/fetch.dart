@@ -50,6 +50,15 @@ class Fetch {
     return response;
   }
 
+  Future getUserById(id) async {
+    var response = await RestConnector(
+      getUserByIdUrl + id,
+      requestType: "GET",
+      data: '',
+    ).getData();
+    return response['data']['user'];
+  }
+
   Future getCities() async {
     var response = await RestConnector(
       getCitiesUrl,
@@ -174,11 +183,52 @@ class Fetch {
       requestType: "GET",
       data: '',
     ).getData();
-    if(response['success']){
+    if (response['success']) {
       return response['data']['notifications'];
-    }
-    else{
+    } else {
       return [];
     }
+  }
+
+  Future getMyChatRooms({@required String id}) async {
+    var response = await RestConnector(
+      chatRoomsUrl + '/' + id,
+      requestType: "GET",
+      data: '',
+    ).getData();
+    if (response['success']) {
+      return response['data']['chatRoom'];
+    } else {
+      return [];
+    }
+  }
+
+  Future createChatRoom(
+      {@required String receiverId, @required String transmitterId}) async {
+    Map body = {
+      "receiverId": receiverId,
+      "transmitterId": transmitterId,
+    };
+    var jsonBody = const JsonEncoder().convert(body);
+    var response = await RestConnector(
+      chatRoomsUrl,
+      requestType: "POST",
+      data: jsonBody,
+    ).getData();
+    if (response['success']) {
+      return response['data']['chatroom'];
+    } else {
+      return [];
+    }
+  }
+
+  Future getChatRoomWithUser(
+      {@required String myId, @required String targetUserId}) async {
+    var response = await RestConnector(
+      getChatRoomWithUserUrl + myId + '/$targetUserId',
+      requestType: "GET",
+      data: '',
+    ).getData();
+    return response;
   }
 }

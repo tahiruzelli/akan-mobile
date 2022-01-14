@@ -1,6 +1,7 @@
 String baseUrl = 'https://acilkan.herokuapp.com/api/v1';
 String loginUrl = '/Users/Login';
 String registerUrl = '/Users/Register';
+String getUserByIdUrl = '/Users/';
 String getCitiesUrl = '/Cities';
 String getDistrictsUrl = '/Districts/FromCity';
 String getBloodTypesUrl = '/BloodTypes';
@@ -10,3 +11,5 @@ String getHospitalsUrl = '/Hospitals';
 String postImageUrl = '/Photos';
 String getNotificationUrl = '/Notifications/';
 String notificationSeenUrl = getNotificationUrl + 'NotificationHadSeen/';
+String chatRoomsUrl = '/ChatRooms';
+String getChatRoomWithUserUrl = chatRoomsUrl + '/GetChatRoomWithUser/';

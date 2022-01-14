@@ -1,4 +1,5 @@
 import 'package:akan_mobile/Controllers/advert_controller.dart';
+import 'package:akan_mobile/Controllers/message_controller.dart';
 import 'package:akan_mobile/Globals/constans/colors.dart';
 import 'package:akan_mobile/Globals/widgets/detail_line.dart';
 import 'package:akan_mobile/Globals/widgets/my_appbar.dart';
@@ -9,6 +10,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AdvertDetail extends StatelessWidget {
   AdvertController advertController = Get.put(AdvertController());
+  MessageController messageController = Get.put(MessageController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,14 +105,21 @@ class AdvertDetail extends StatelessWidget {
 
   ElevatedButton _buildMessageButton() {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        messageController.getChatRoomWithUser(
+            advertController.choosenAdvert.advertCreatorId.toString());
+      },
       style: ElevatedButton.styleFrom(
         primary: colorBlue,
       ),
-      child: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
         child: Center(
-          child: Text('Mesaj At'),
+          child: Obx(
+            () => messageController.loading.value
+                ? const CupertinoActivityIndicator()
+                : const Text('Mesaj At'),
+          ),
         ),
       ),
     );
