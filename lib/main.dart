@@ -1,4 +1,3 @@
-import 'package:akan_mobile/Views/HomePage/home_page.dart';
 import 'package:akan_mobile/Views/Main/main_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,6 @@ import 'Views/Login/login_page.dart';
 void main() async {
   await GetStorage.init();
   await Firebase.initializeApp();
-  print('a');
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
