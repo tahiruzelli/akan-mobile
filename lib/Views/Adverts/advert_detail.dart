@@ -13,16 +13,23 @@ class AdvertDetail extends StatelessWidget {
   MessageController messageController = Get.put(MessageController());
   @override
   Widget build(BuildContext context) {
+    advertController.getAdvertDetail();
     return Scaffold(
       appBar: buildAppBar(),
-      body: ListView(
-        children: [
-          _buildImageArea(),
-          _buildData(),
-          _buildSeeLocationButton(),
-          _buildDetails(),
-          _buildButtons(),
-        ],
+      body: Obx(
+        () => advertController.advertsLoading.value
+            ? const Center(
+                child: CupertinoActivityIndicator(),
+              )
+            : ListView(
+                children: [
+                  _buildImageArea(),
+                  _buildData(),
+                  _buildSeeLocationButton(),
+                  _buildDetails(),
+                  _buildButtons(),
+                ],
+              ),
       ),
     );
   }
@@ -147,13 +154,14 @@ class AdvertDetail extends StatelessWidget {
   }
 
   Padding _buildDetails() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Card(
         child: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Text(
-              'Merhaba ismim tahir kardesim yakin vakitte trafik kazasi gecirdi gunde birden cok kez ameliyat oluyor dolayisiyla surekli kana ihtiyac oluyor. Sigara ve alkol tuketmeyen temiz kani olan arkadaslarim lutfen destekte bulunabilir misiniz? Dilediginiz zaman telefondan ulasabilirsiniz.'),
+            advertController.advertDetail.advert.details,
+          ),
         ),
       ),
     );
@@ -164,31 +172,33 @@ class AdvertDetail extends StatelessWidget {
       children: [
         DetailLine(
           title: 'İsim',
-          content: 'Tahir Uzelli',
+          content: advertController.advertDetail.advertCreator.first.fullName,
         ),
         DetailLine(
           title: 'E-mail',
-          content: 'tahir.uzelli@gmail.com',
+          content: advertController.advertDetail.advertCreator.first.email,
         ),
         DetailLine(
           title: 'Kan Tipi',
-          content: '0 Pozitif',
+          content: advertController.advertDetail.advertCreator.first.bloodType,
         ),
         DetailLine(
           title: 'Telefon',
-          content: '+90 551 552 89 85',
+          content: advertController.advertDetail.advertCreator.first.phone,
         ),
         DetailLine(
           title: 'Oluşturma Tarihi',
-          content: '2021-12-30',
+          content:
+              advertController.advertDetail.advert.creationTime.split('T')[0],
         ),
         DetailLine(
           title: 'Şehir',
-          content: 'Sakarya',
+          content: advertController.advertDetail.advertHospital.first.adress,
         ),
         DetailLine(
           title: 'Hastane',
-          content: 'Sakarya E.A.H',
+          content:
+              advertController.advertDetail.advertHospital.first.hospitalName,
         ),
       ],
     );
@@ -200,7 +210,7 @@ class AdvertDetail extends StatelessWidget {
       width: Get.width,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: 2,
+        itemCount: advertController.advertDetail.advertPhotos.length,
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
@@ -208,7 +218,8 @@ class AdvertDetail extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.network(
-                    'https://www.elmas67.com/images/haberler/2019/11/acil-kan-ihtiyaci_39722.png'),
+                  advertController.advertDetail.advertPhotos[index].url,
+                ),
               ),
             ),
           );

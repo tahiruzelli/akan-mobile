@@ -1,6 +1,7 @@
 import 'package:akan_mobile/Globals/widgets/my_snackbar.dart';
 import 'package:akan_mobile/Services/fetch.dart';
 import 'package:akan_mobile/Views/Adverts/advert_detail.dart';
+import 'package:akan_mobile/models/advert_detail_model.dart';
 import 'package:akan_mobile/models/all_advert_model.dart';
 import 'package:akan_mobile/models/user_model.dart';
 import 'package:get/get.dart';
@@ -10,9 +11,8 @@ class AdvertController extends GetxController {
   Fetch f = Fetch();
   RxList<AllAdvertModel> adverts = <AllAdvertModel>[].obs;
   AllAdvertModel choosenAdvert;
+  AdvertDetailModel advertDetail;
   RxBool advertsLoading = false.obs;
-  RxBool advertOwnerLoading = false.obs;
-  RxBool advertHostpitalLoading = false.obs;
   RxBool beDonorLoading = false.obs;
   UserModel myUser = UserModel.fromJson(GetStorage().read('UserData'));
   @override
@@ -50,7 +50,14 @@ class AdvertController extends GetxController {
     });
   }
 
-  getAdvertDetail() {}
+  getAdvertDetail() {
+    advertsLoading.value = true;
+    f.getAdvertDetail(choosenAdvert.advertID).then((value) {
+      
+      advertDetail = AdvertDetailModel.fromJson(value);
+      advertsLoading.value = false;
+    });
+  }
 
   onAdvertCardPressed(AllAdvertModel advert) {
     choosenAdvert = advert;

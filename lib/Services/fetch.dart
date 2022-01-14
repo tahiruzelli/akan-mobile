@@ -231,4 +231,13 @@ class Fetch {
     ).getData();
     return response;
   }
+
+  Future getAdvertDetail(id) async {
+    var response = await RestConnector(
+      getAdvertsUrl + '/$id',
+      requestType: "GET",
+      data: '',
+    ).getData();
+    return response['data'];
+  }
 }
