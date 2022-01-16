@@ -1,3 +1,4 @@
+import 'package:akan_mobile/Controllers/profile_controller.dart';
 import 'package:akan_mobile/Globals/constans/colors.dart';
 import 'package:akan_mobile/Globals/widgets/my_appbar.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:get/get.dart';
 import 'SubPages/manage_account.dart';
 
 class SettingsPage extends StatelessWidget {
+  ProfileController profileController =Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +34,9 @@ class SettingsPage extends StatelessWidget {
           button(Icons.privacy_tip, 'Gizlilik Politikası', () {}),
           button(Icons.copyright, 'Telif Hakkı Politikası', () {}),
           divider(),
-          button(Icons.exit_to_app, 'Çıkış', () {}, isRed: true),
+          button(Icons.exit_to_app, 'Çıkış', () {
+            profileController.exitApp();
+          }, isRed: true),
           const SizedBox(height: 20),
         ],
       ),

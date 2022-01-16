@@ -1,7 +1,10 @@
+import 'package:akan_mobile/Controllers/profile_controller.dart';
 import 'package:akan_mobile/Globals/widgets/detail_line.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MyProfilePage extends StatelessWidget {
+  ProfileController profileController = Get.put(ProfileController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,14 +21,14 @@ class MyProfilePage extends StatelessWidget {
   }
 
   Padding _buildPicture() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 20.0),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20.0),
       child: Align(
         alignment: Alignment.topCenter,
         child: CircleAvatar(
           radius: 70,
-          backgroundImage: NetworkImage(
-              'https://media-exp1.licdn.com/dms/image/C4D03AQFe883wZOzNDw/profile-displayphoto-shrink_200_200/0/1592940508582?e=1645056000&v=beta&t=n1uJWoEInQjpeP-Q3Mo_54pNcj4rTXCjK4kqX1GX-Zk'),
+          backgroundColor: Colors.transparent,
+          backgroundImage: NetworkImage(profileController.myUser.photoUrl),
         ),
       ),
     );
@@ -36,19 +39,19 @@ class MyProfilePage extends StatelessWidget {
       children: [
         DetailLine(
           title: 'İsim',
-          content: 'Tahir Uzelli',
+          content: profileController.myUser.fullName,
         ),
         DetailLine(
           title: 'E-mail',
-          content: 'tahir.uzelli@gmail.com',
+          content: profileController.myUser.email,
         ),
         DetailLine(
           title: 'Kan Tipi',
-          content: '0 Pozitif',
+          content: profileController.myUser.bloodType,
         ),
         DetailLine(
           title: 'Telefon',
-          content: '+90 551 552 89 85',
+          content: profileController.myUser.phone,
         ),
       ],
     );
