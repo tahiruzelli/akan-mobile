@@ -13,7 +13,7 @@ class AdvertDetail extends StatelessWidget {
   MessageController messageController = Get.put(MessageController());
   @override
   Widget build(BuildContext context) {
-    advertController.getAdvertDetail();
+    advertController.getAdvertDetail(advertController.choosenAdvert.advertID.toString());
     return Scaffold(
       appBar: buildAppBar(),
       body: Obx(

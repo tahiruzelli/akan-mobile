@@ -120,6 +120,37 @@ class Fetch {
     }
   }
 
+  Future getMyProposals({@required String myID}) async {
+    var response = await RestConnector(
+      getMyProposalsUrl + myID,
+      requestType: "GET",
+      data: '',
+    ).getData();
+    return response['data'];
+  }
+
+  Future getAdvertProposals({@required String advertId}) async {
+    var response = await RestConnector(
+      getAdvertProposalsUrl + advertId,
+      requestType: "GET",
+      data: '',
+    ).getData();
+    if (response['success']) {
+      response['data']['proposals'];
+    } else {
+      return [];
+    }
+  }
+
+  Future getMyAdverts({@required String myID}) async {
+    var response = await RestConnector(
+      getMyAdvertsUrl + myID,
+      requestType: "GET",
+      data: '',
+    ).getData();
+    return response['data']['adverts'];
+  }
+
   Future beDonor(
       {@required String transmitterID, @required String advertId}) async {
     var response = await RestConnector(
@@ -192,7 +223,7 @@ class Fetch {
 
   Future getMyChatRooms({@required String id}) async {
     var response = await RestConnector(
-      chatRoomsUrl + '/' + id,
+      getMyChatRoomsUrl + id,
       requestType: "GET",
       data: '',
     ).getData();
@@ -239,5 +270,14 @@ class Fetch {
       data: '',
     ).getData();
     return response['data'];
+  }
+
+  Future acceptProposal(id) async {
+    var response = await RestConnector(
+      acceptProposalUrl + id,
+      requestType: "PUT",
+      data: '',
+    ).getData();
+    return response;
   }
 }

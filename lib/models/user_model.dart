@@ -1,3 +1,5 @@
+import 'package:akan_mobile/Globals/constans/urls.dart';
+
 class UserModel {
   int id;
   String email;
@@ -40,7 +42,7 @@ class UserModel {
     districtId = json['districtId'];
     maxDestination = json['maxDestination'];
     isAvailable = json['isAvailable'];
-    photoUrl = json['photoUrl'];
+    photoUrl = json['photoUrl'] ==''?defaultPhotoUrl: json['photoUrl'];
     creationTime = json['creationTime'];
   }
 

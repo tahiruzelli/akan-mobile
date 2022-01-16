@@ -1,3 +1,4 @@
+import 'package:akan_mobile/Controllers/proposal_controller.dart';
 import 'package:akan_mobile/Globals/constans/colors.dart';
 import 'package:akan_mobile/Views/Notifitacions/notification_list_page.dart';
 import 'package:akan_mobile/Views/Proposals/pages/my_donor_applications_page.dart';
@@ -15,6 +16,7 @@ class _ProposalsPage extends State<ProposalsPage>
   double logoHeight = 75;
   double logoWidth = 300;
   TabController tabController;
+  ProposalController proposalController = Get.put(ProposalController());
   @override
   void initState() {
     // TODO: implement initState
@@ -24,6 +26,8 @@ class _ProposalsPage extends State<ProposalsPage>
       initialIndex: 0,
       length: 2,
     );
+    proposalController.getMyAdverts();
+    proposalController.getMyProposals();
   }
 
   @override

@@ -1,10 +1,15 @@
 import 'package:akan_mobile/Globals/constans/colors.dart';
+import 'package:akan_mobile/Views/Messages/message_detail.dart';
+import 'package:akan_mobile/models/chat_room_model.dart';
+import 'package:akan_mobile/models/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class MessageListCard extends StatelessWidget {
-  int index;
-  MessageListCard(this.index);
+  ChatRoomModel chatRoom;
+  UserModel user;
+  MessageListCard(this.chatRoom, this.user);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -14,13 +19,19 @@ class MessageListCard extends StatelessWidget {
           onLongPress: () {
             _onLongPressed(context);
           },
-          onTap: () {},
-          leading: const CircleAvatar(
-            backgroundImage: NetworkImage(
-                'https://media-exp1.licdn.com/dms/image/C4D03AQFe883wZOzNDw/profile-displayphoto-shrink_200_200/0/1592940508582?e=1645056000&v=beta&t=n1uJWoEInQjpeP-Q3Mo_54pNcj4rTXCjK4kqX1GX-Zk'),
+          onTap: () {
+            Get.to(
+              MessageDetailPage(
+                receiver: user,
+                roomID: chatRoom.id.toString(),
+              ),
+            );
+          },
+          leading: CircleAvatar(
+            backgroundColor: Colors.transparent,
+            backgroundImage: NetworkImage(user.photoUrl),
           ),
-          title: const Text('Tahir Uzelli'),
-          subtitle: const Text('Evet ihtiyacımız hala devam ediyor'),
+          title: Text(user.fullName),
           trailing: _trailing(),
         ),
       ),
@@ -28,51 +39,12 @@ class MessageListCard extends StatelessWidget {
   }
 
   _trailing() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Text(
-          '17.04',
-          style: TextStyle(
-            color: index % 2 == 0 ? colorRed : Colors.black,
-            fontSize: 10,
-          ),
-        ),
-        index % 2 == 0
-            ? Padding(
-                padding: const EdgeInsets.only(top: 4.0),
-                child: Container(
-                  height: 20,
-                  width: 20,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      begin: Alignment.bottomRight,
-                      end: Alignment.topLeft,
-                      colors: [
-                        colorRed,
-                        inactiveColor,
-                        colorRed,
-                      ],
-                    ),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      '2',
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              )
-            : Container(
-                height: 0,
-                width: 0,
-              ),
-      ],
+    return Text(
+      '17.04',
+      style: TextStyle(
+        color: colorRed,
+        fontSize: 10,
+      ),
     );
   }
 

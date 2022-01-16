@@ -7,7 +7,8 @@ import 'package:get_storage/get_storage.dart';
 
 class MessageController extends GetxController {
   Fetch f = Fetch();
-  RxList<ChatRoomModel> adverts = <ChatRoomModel>[].obs;
+  RxList<ChatRoomModel> chatRooms = <ChatRoomModel>[].obs;
+  RxList<UserModel> users = <UserModel>[].obs;
   UserModel myUser = UserModel.fromJson(GetStorage().read('UserData'));
   RxBool loading = false.obs;
   @override
@@ -17,10 +18,25 @@ class MessageController extends GetxController {
     getMyMessageRooms();
   }
 
-  getMyMessageRooms() {
-    f.getMyChatRooms(id: myUser.id.toString()).then((value) {
-      adverts.value =
+  getMyMessageRooms() async {
+    chatRooms.clear();
+    users.clear();
+    loading.value = true;
+    f.getMyChatRooms(id: myUser.id.toString()).then((value) async {
+      chatRooms.value =
           (value as List).map((e) => ChatRoomModel.fromJson(e)).toList();
+      for (int i = 0; i < chatRooms.length; i++) {
+        if (myUser.id == chatRooms[i].receiverId) {
+          var item = await f.getUserById(chatRooms[i].transmitterId.toString());
+
+          users.add(UserModel.fromJson(item));
+        } else {
+          var item = await f.getUserById(chatRooms[i].receiverId.toString());
+
+          users.add(UserModel.fromJson(item));
+        }
+      }
+      loading.value = false;
     });
   }
 

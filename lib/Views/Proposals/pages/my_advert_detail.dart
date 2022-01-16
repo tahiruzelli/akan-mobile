@@ -1,25 +1,80 @@
 import 'package:akan_mobile/Controllers/advert_controller.dart';
+import 'package:akan_mobile/Controllers/message_controller.dart';
+import 'package:akan_mobile/Controllers/proposal_controller.dart';
 import 'package:akan_mobile/Globals/constans/colors.dart';
+import 'package:akan_mobile/Globals/constans/urls.dart';
 import 'package:akan_mobile/Globals/widgets/detail_line.dart';
 import 'package:akan_mobile/Globals/widgets/my_appbar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MyAdvertDetail extends StatelessWidget {
   AdvertController advertController = Get.put(AdvertController());
+  MessageController messageController = Get.put(MessageController());
+  ProposalController proposalController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      body: ListView(
-        children: [
-          _buildImageArea(),
-          _buildData(),
-          _buildSeeLocationButton(),
-          _buildDetails(),
-          _buildButtons(),
-        ],
+      body: Obx(
+        () => advertController.advertsLoading.value
+            ? const Center(
+                child: CupertinoActivityIndicator(),
+              )
+            : ListView(
+                children: [
+                  _buildImageArea(),
+                  _buildData(),
+                  _buildSeeLocationButton(),
+                  _buildDetails(),
+                  _buildProposals(),
+                  _buildButtons(),
+                ],
+              ),
+      ),
+    );
+  }
+
+  _buildProposals() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Card(
+        child: SizedBox(
+          height: advertController.proposals.length * (Get.height * 0.07),
+          child: ListView.builder(
+              itemCount: advertController.proposals.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: 20,
+                      backgroundColor: Colors.transparent,
+                      backgroundImage: NetworkImage(
+                          advertController.proposals[index].transmitterPhoto),
+                    ),
+                    title:
+                        Text(advertController.proposals[index].transmitterName),
+                    trailing: IconButton(
+                        onPressed: () {
+                          proposalController.acceptProposal(
+                            proposalId: advertController
+                                .proposals[index].proposalId
+                                .toString(),
+                            targetUserId: advertController
+                                .proposals[index].transmitterId
+                                .toString(),
+                          );
+                        },
+                        icon: Icon(
+                          Icons.done_sharp,
+                          color: colorGrassGreen,
+                        )),
+                  ),
+                );
+              }),
+        ),
       ),
     );
   }
@@ -102,14 +157,21 @@ class MyAdvertDetail extends StatelessWidget {
 
   ElevatedButton _buildMessageButton() {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        messageController.getChatRoomWithUser(
+            advertController.choosenAdvert.advertCreatorId.toString());
+      },
       style: ElevatedButton.styleFrom(
         primary: colorBlue,
       ),
-      child: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
         child: Center(
-          child: Text('Mesaj At'),
+          child: Obx(
+            () => messageController.loading.value
+                ? const CupertinoActivityIndicator()
+                : const Text('Mesaj At'),
+          ),
         ),
       ),
     );
@@ -123,23 +185,28 @@ class MyAdvertDetail extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         primary: colorRed,
       ),
-      child: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
         child: Center(
-          child: Text('Donör Ol!'),
+          child: Obx(
+            () => advertController.beDonorLoading.value
+                ? const CupertinoActivityIndicator()
+                : const Text('Donör Ol!'),
+          ),
         ),
       ),
     );
   }
 
   Padding _buildDetails() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Card(
         child: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Text(
-              'Merhaba ismim tahir kardesim yakin vakitte trafik kazasi gecirdi gunde birden cok kez ameliyat oluyor dolayisiyla surekli kana ihtiyac oluyor. Sigara ve alkol tuketmeyen temiz kani olan arkadaslarim lutfen destekte bulunabilir misiniz? Dilediginiz zaman telefondan ulasabilirsiniz.'),
+            advertController.advertDetail.advert.details,
+          ),
         ),
       ),
     );
@@ -150,56 +217,61 @@ class MyAdvertDetail extends StatelessWidget {
       children: [
         DetailLine(
           title: 'İsim',
-          content: 'Tahir Uzelli',
+          content: advertController.advertDetail.advertCreator.first.fullName,
         ),
         DetailLine(
           title: 'E-mail',
-          content: 'tahir.uzelli@gmail.com',
+          content: advertController.advertDetail.advertCreator.first.email,
         ),
         DetailLine(
           title: 'Kan Tipi',
-          content: '0 Pozitif',
+          content: advertController.advertDetail.advertCreator.first.bloodType,
         ),
         DetailLine(
           title: 'Telefon',
-          content: '+90 551 552 89 85',
+          content: advertController.advertDetail.advertCreator.first.phone,
         ),
         DetailLine(
           title: 'Oluşturma Tarihi',
-          content: '2021-12-30',
+          content:
+              advertController.advertDetail.advert.creationTime.split('T')[0],
         ),
         DetailLine(
           title: 'Şehir',
-          content: 'Sakarya',
+          content: advertController.advertDetail.advertHospital.first.adress,
         ),
         DetailLine(
           title: 'Hastane',
-          content: 'Sakarya E.A.H',
+          content:
+              advertController.advertDetail.advertHospital.first.hospitalName,
         ),
       ],
     );
   }
 
   SizedBox _buildImageArea() {
-    return SizedBox(
-      height: Get.height * 0.3,
-      width: Get.width,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: 2,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.network(
-                    'https://www.elmas67.com/images/haberler/2019/11/acil-kan-ihtiyaci_39722.png'),
-              ),
+    return advertController.advertDetail.advertPhotos.isEmpty
+        ? const SizedBox(height: 50)
+        : SizedBox(
+            height: Get.height * 0.3,
+            width: Get.width,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: advertController.advertDetail.advertPhotos.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(
+                        advertController.advertDetail.advertPhotos[index].url,
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
           );
-        },
-      ),
-    );
   }
 }

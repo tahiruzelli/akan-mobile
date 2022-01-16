@@ -1,12 +1,15 @@
 import 'package:akan_mobile/Globals/constans/colors.dart';
 import 'package:akan_mobile/Views/Adverts/advert_detail.dart';
+import 'package:akan_mobile/models/proposal_model.dart';
+import 'package:akan_mobile/models/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MyApplicationCard extends StatelessWidget {
-  int index;
-  MyApplicationCard(this.index);
+  ProposalModel proposal;
+  UserModel myUser;
+  MyApplicationCard(this.proposal,this.myUser);
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,16 +22,15 @@ class MyApplicationCard extends StatelessWidget {
           onTap: () {
             Get.to(AdvertDetail());
           },
-          leading: const CircleAvatar(
-            backgroundImage: NetworkImage(
-                'https://media-exp1.licdn.com/dms/image/C4D03AQFe883wZOzNDw/profile-displayphoto-shrink_200_200/0/1592940508582?e=1645056000&v=beta&t=n1uJWoEInQjpeP-Q3Mo_54pNcj4rTXCjK4kqX1GX-Zk'),
+          leading: CircleAvatar(
+            backgroundColor: Colors.transparent,
+            backgroundImage: NetworkImage(myUser.photoUrl),
           ),
-          title: const Text('Tahir Uzelli'),
-          subtitle: const Text('AB+ son 2 gün acil kan'),
+          title: Text(myUser.fullName),
           trailing: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('29.12.2021'),
+              Text(proposal.proposalCreationTime.split('T')[0]),
               statusText(),
             ],
           ),
@@ -38,20 +40,15 @@ class MyApplicationCard extends StatelessWidget {
   }
 
   Text statusText() {
-    if (index % 3 == 0) {
+    if (proposal.isProposalAccepted) {
       return Text(
         'Kabul Edildi',
         style: TextStyle(color: colorSuccess),
       );
-    } else if (index % 3 == 1) {
+    } else if (!proposal.isProposalAccepted) {
       return Text(
         'Bekliyor',
         style: TextStyle(color: colorWarning),
-      );
-    } else if (index % 3 == 2) {
-      return Text(
-        'Reddedildi',
-        style: TextStyle(color: colorDanger),
       );
     } else {
       return const Text('');
