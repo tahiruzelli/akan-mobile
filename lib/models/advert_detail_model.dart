@@ -164,18 +164,18 @@ class AdvertCreator {
 
   AdvertCreator.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    email = json['email'];
-    phone = json['phone'];
-    password = json['password'];
-    fullName = json['fullName'];
-    bloodType = json['bloodType'];
-    location = json['location'];
+    email = json['email'].toString();
+    phone = json['phone'].toString();
+    password = json['password'].toString();
+    fullName = json['fullName'].toString();
+    bloodType = json['bloodType'].toString();
+    location = json['location'].toString();
     cityId = json['cityId'];
     districtId = json['districtId'];
     maxDestination = json['maxDestination'].toString();
     isAvailable = json['isAvailable'];
-    photoUrl = json['photoUrl'];
-    creationTime = json['creationTime'];
+    photoUrl = json['photoUrl'].toString();
+    creationTime = json['creationTime'].toString();
   }
 
   Map<String, dynamic> toJson() {

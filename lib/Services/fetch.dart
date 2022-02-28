@@ -56,7 +56,11 @@ class Fetch {
       requestType: "GET",
       data: '',
     ).getData();
-    return response['data']['user'];
+    if (response['success']) {
+      return response['data'][0];
+    } else {
+      return null;
+    }
   }
 
   Future getCities() async {
@@ -136,7 +140,7 @@ class Fetch {
       data: '',
     ).getData();
     if (response['success']) {
-      response['data']['proposals'];
+      return response['data'];
     } else {
       return [];
     }
@@ -148,7 +152,11 @@ class Fetch {
       requestType: "GET",
       data: '',
     ).getData();
-    return response['data']['adverts'];
+    if (response['success']) {
+      return response['data']['adverts'];
+    } else {
+      [];
+    }
   }
 
   Future beDonor(
@@ -277,6 +285,21 @@ class Fetch {
       acceptProposalUrl + id,
       requestType: "PUT",
       data: '',
+    ).getData();
+    return response;
+  }
+
+  Future changeProfilePhoto(
+      {@required String userId, @required String photoUrl}) async {
+    Map body = {
+      "userId": userId,
+      "newDataString": photoUrl,
+    };
+    var jsonBody = const JsonEncoder().convert(body);
+    var response = await RestConnector(
+      changeProfilePhotoUrl,
+      requestType: "PUT",
+      data: jsonBody,
     ).getData();
     return response;
   }

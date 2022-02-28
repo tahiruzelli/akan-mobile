@@ -19,3 +19,4 @@ String notificationSeenUrl = getNotificationUrl + 'NotificationHadSeen/';
 String chatRoomsUrl = '/ChatRooms';
 String getMyChatRoomsUrl = chatRoomsUrl+ '/GetChatRoomWithUser/';
 String getChatRoomWithUserUrl = chatRoomsUrl + '/GetChatRoomWithUsers/';
+String changeProfilePhotoUrl = '/Users/ChangeProfilePhoto';

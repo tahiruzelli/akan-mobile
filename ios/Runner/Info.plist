@@ -41,7 +41,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Akan ilan eklemek icin ve profil fotografi eklemek icin galeriye izin erisimine ihtiyac duyar</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Akan ilan eklemek icin ve profil fotografi eklemek icin kameya izin erisimine ihtiyac duyar</string>
 </dict>
 </plist>

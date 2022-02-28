@@ -1,3 +1,5 @@
+import 'package:akan_mobile/Globals/constans/urls.dart';
+
 class AllAdvertModel {
   int advertID;
   String advertBloodType;
@@ -18,12 +20,14 @@ class AllAdvertModel {
 
   AllAdvertModel.fromJson(Map<String, dynamic> json) {
     advertID = json['advertID'];
-    advertBloodType = json['advertBloodType'];
+    advertBloodType = json['advertBloodType'].toString();
     advertCreationTime = json['advertCreationTime'].toString().split('T')[0];
     advertDetail = json['advertDetail'];
     advertCreatorId = json['advertCreatorId'];
     advertCreatorName = json['advertCreatorName'];
-    advertCreatorPhoto = json['advertCreatorPhoto'];
+    advertCreatorPhoto = json['advertCreatorPhoto'] == ''
+        ? defaultPhotoUrl
+        : json['advertCreatorPhoto'];
   }
 
   Map<String, dynamic> toJson() {

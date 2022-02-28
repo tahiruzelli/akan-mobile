@@ -8,6 +8,7 @@ class HomePage extends StatelessWidget {
   AdvertController advertController = Get.put(AdvertController());
   @override
   Widget build(BuildContext context) {
+    advertController.getAllAdverts();
     return Scaffold(
       body: Obx(
         () => advertController.advertsLoading.value

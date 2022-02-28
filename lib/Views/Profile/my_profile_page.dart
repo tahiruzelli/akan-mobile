@@ -23,12 +23,41 @@ class MyProfilePage extends StatelessWidget {
   Padding _buildPicture() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20.0),
-      child: Align(
-        alignment: Alignment.topCenter,
-        child: CircleAvatar(
-          radius: 70,
-          backgroundColor: Colors.transparent,
-          backgroundImage: NetworkImage(profileController.myUser.photoUrl),
+      child: SizedBox(
+        height: Get.height / 5,
+        width: Get.width / 2,
+        child: Stack(
+          children: [
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                height: Get.height / 5,
+                width: Get.width / 2,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      profileController.myUser.photoUrl,
+                    ),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 10,
+              child: IconButton(
+                onPressed: () {
+                  profileController.changeProfilPhoto();
+                },
+                icon: const Icon(
+                  Icons.edit,
+                  color: Colors.red,
+                ),
+              ),
+            )
+          ],
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:akan_mobile/Controllers/proposal_controller.dart';
 import 'package:akan_mobile/Globals/constans/colors.dart';
+import 'package:akan_mobile/Views/AddAdvert/add_adverts_page.dart';
 import 'package:akan_mobile/Views/Notifitacions/notification_list_page.dart';
 import 'package:akan_mobile/Views/Proposals/pages/my_donor_applications_page.dart';
 import 'package:akan_mobile/Views/Proposals/pages/my_proposals_page.dart';
@@ -58,7 +59,9 @@ class _ProposalsPage extends State<ProposalsPage>
         )
       ],
       leading: IconButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.to(AddAdvertPage());
+        },
         icon: const Icon(Icons.add_box),
       ),
       title: Image.asset(

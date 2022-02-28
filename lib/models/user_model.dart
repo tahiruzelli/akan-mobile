@@ -36,13 +36,13 @@ class UserModel {
     phone = json['phone'];
     password = json['password'];
     fullName = json['fullName'];
-    bloodType = json['bloodType'];
+    bloodType = json['bloodType'].toString();
     location = json['location'];
     cityId = json['cityId'];
     districtId = json['districtId'];
     maxDestination = json['maxDestination'];
     isAvailable = json['isAvailable'];
-    photoUrl = json['photoUrl'] ==''?defaultPhotoUrl: json['photoUrl'];
+    photoUrl = json['photoUrl'] == '' ? defaultPhotoUrl : json['photoUrl'];
     creationTime = json['creationTime'];
   }
 
